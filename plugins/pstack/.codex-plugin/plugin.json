@@ -1,6 +1,6 @@
 {
   "name": "pstack",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Portable pstack workflows for planning, implementation, review, and verification.",
   "author": {
     "name": "mbokinala",
