@@ -1,0 +1,5 @@
+interface:
+  display_name: "tdd"
+  short_description: "Use only when the user explicitly asks for TDD, a failing test, "
+policy:
+  allow_implicit_invocation: false

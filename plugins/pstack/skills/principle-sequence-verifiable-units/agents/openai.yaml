@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-sequence-verifiable-units"
+  short_description: "Apply to multi-step work (sweeps, migrations, runs of similar ed"
+policy:
+  allow_implicit_invocation: false

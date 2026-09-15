@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-migrate-callers-then-delete-legacy-apis"
+  short_description: "Apply when introducing a new internal API while old callers stil"
+policy:
+  allow_implicit_invocation: false

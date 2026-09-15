@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-exhaust-the-design-space"
+  short_description: "Apply when facing a novel UI interaction or architectural decisi"
+policy:
+  allow_implicit_invocation: false

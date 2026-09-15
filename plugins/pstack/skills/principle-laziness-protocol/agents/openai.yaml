@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-laziness-protocol"
+  short_description: "Apply when refactoring, evaluating diff size, or tempted to add "
+policy:
+  allow_implicit_invocation: false

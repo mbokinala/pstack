@@ -1,0 +1,5 @@
+interface:
+  display_name: "no-comments"
+  short_description: "Spawn Comment Sicko, fix accepted findings, and offer encodings "
+policy:
+  allow_implicit_invocation: false

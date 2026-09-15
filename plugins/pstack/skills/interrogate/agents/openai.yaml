@@ -1,0 +1,5 @@
+interface:
+  display_name: "interrogate"
+  short_description: "Use for \"interrogate\", \"adversarial review\", \"multi-model review"
+policy:
+  allow_implicit_invocation: false

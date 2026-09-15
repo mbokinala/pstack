@@ -1,0 +1,5 @@
+interface:
+  display_name: "show-me-your-work"
+  short_description: "Keep a reviewable decision trail for long-running or unattended "
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-guard-the-context-window"
+  short_description: "Apply when context is filling up: large outputs, long files, rep"
+policy:
+  allow_implicit_invocation: false

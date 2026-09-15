@@ -1,0 +1,5 @@
+interface:
+  display_name: "automate-me"
+  short_description: "Create or update a personal mode skill from the user's working c"
+policy:
+  allow_implicit_invocation: false

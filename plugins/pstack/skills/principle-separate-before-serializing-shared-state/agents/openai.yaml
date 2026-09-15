@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-separate-before-serializing-shared-state"
+  short_description: "Apply when concurrent actors might write to the same file, branc"
+policy:
+  allow_implicit_invocation: false

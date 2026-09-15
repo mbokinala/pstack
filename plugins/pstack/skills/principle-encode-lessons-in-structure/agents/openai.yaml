@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-encode-lessons-in-structure"
+  short_description: "Apply when you catch yourself writing the same instruction a sec"
+policy:
+  allow_implicit_invocation: false

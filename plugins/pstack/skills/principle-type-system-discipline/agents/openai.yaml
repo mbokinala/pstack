@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-type-system-discipline"
+  short_description: "Apply when designing types, reviewing a function signature, or w"
+policy:
+  allow_implicit_invocation: false

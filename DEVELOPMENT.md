@@ -53,9 +53,18 @@ Developers can install directly from a shared archive:
 npx --yes --package=/absolute/path/to/pstack-port-0.1.0.tgz pstack install --providers=codex,claude --scope=project
 ```
 
-For an npm release, first choose an owned package name/scope and set the repository metadata, bump the version, run the checks, and publish through the owner account. No package has been published by this project setup. A native plugin/marketplace wrapper can be added later using the same generated skills; the current delivery path is the installer/archive.
+For an npm release, first choose an owned package name/scope and set the repository metadata, bump the version, run the checks, and publish through the owner account. No npm package has been published by this project setup.
+
+### GitHub marketplace release
+
+`.agents/plugins/marketplace.json` exposes the **pstack** plugin from `plugins/pstack`. The plugin keeps `$poteto-mode` and the other 50 skill names unchanged. `npm run build` copies the generated Codex skills, bundled resources, licenses, and provenance into this directory and synchronizes the plugin version with `package.json`.
+
+Commit the generated `plugins/pstack/` files together with source changes. Git marketplace installs consume these files directly and do not run npm or initialize the upstream submodule. Do not edit generated skills by hand; edit adapters and rebuild. Plugin presentation metadata is maintained in `plugins/pstack/.codex-plugin/plugin.json`.
+
+Before releasing, run `npm run check`, review the generated diff, and commit it. CI checks that the committed plugin matches the build. Publish the commit to `mbokinala/pstack`, then optionally tag the release. Users can pin a published tag with `codex plugin marketplace add mbokinala/pstack --ref v0.1.0` (substitute an existing release tag).
+
+Install **pstack** from the desktop Plugins Directory and test `$poteto-mode`, a direct individual skill invocation, and a workflow using bundled resources in a new conversation. The plugin uses the bundled agent prompt fallback rather than registering the file installer's custom agents. Helper dependency bootstrap still needs network access and a writable installed scripts directory; installation alone does not verify those optional runtime capabilities.
 
 ## Validation
 
 `npm run check` checks source pinning, patch anchors, generated YAML/names/invocation policy, resource links, artifact hashes, deterministic output, and installer behavior in temporary directories. Additional tests cover the portable helpers. These checks do not establish live behavior in every Codex/Claude/Cursor version; smoke-test representative prompts in each target host before claiming full behavioral parity.
-

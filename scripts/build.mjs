@@ -2,6 +2,7 @@ import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync, chmodSync }
 import { join, dirname, basename } from 'node:path';
 import { root, source, files, verifyPin, sha256 } from '../lib/source.mjs';
 import { applyPatches, frontmatter, portable, providers, skill } from '../lib/convert.mjs';
+import { buildPlugin } from './build-plugin.mjs';
 
 const provenance = verifyPin();
 const version = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8')).version;
@@ -38,7 +39,8 @@ for (const [provider, settings] of Object.entries(providers)) {
       const converted = skill(data.toString(), path.split('/')[1], provider);
       write(destination, converted.text);
       if (provider === 'codex') {
-        write(join(dirname(destination), 'agents/openai.yaml'), `policy:\n  allow_implicit_invocation: ${!converted.explicit}\n`);
+        const metadata = frontmatter(converted.text, path).data;
+        write(join(dirname(destination), 'agents/openai.yaml'), `interface:\n  display_name: ${JSON.stringify(metadata.name)}\n  short_description: ${JSON.stringify(metadata.description.slice(0, 64))}\npolicy:\n  allow_implicit_invocation: ${!converted.explicit}\n`);
       }
       write(join(dirname(destination), 'references/pstack-runtime.md'), portable(runtime, provider));
       write(join(dirname(destination), 'LICENSE'), readFileSync(join(source, 'LICENSE')));
@@ -71,4 +73,5 @@ const manifest = {
   files: Object.fromEntries(files(dist).map(path => [path, sha256(readFileSync(join(dist, path)))])),
 };
 write(join(dist, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
+buildPlugin(manifest.upstream);
 console.log(`Built ${manifest.skills.length} skills and 2 agents for ${manifest.providers.join(', ')} from pstack ${provenance.version} (${provenance.commit.slice(0, 12)}).`);

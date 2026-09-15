@@ -1,0 +1,5 @@
+interface:
+  display_name: "unslop"
+  short_description: "Cut AI tells from any writing. Must always apply."
+policy:
+  allow_implicit_invocation: false

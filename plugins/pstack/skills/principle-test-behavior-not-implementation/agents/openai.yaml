@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-test-behavior-not-implementation"
+  short_description: "Apply when you write, change, or keep a test. Call the code the "
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "typescript-best-practices"
+  short_description: "TypeScript best practices. Use when reading or editing any .ts o"
+policy:
+  allow_implicit_invocation: false

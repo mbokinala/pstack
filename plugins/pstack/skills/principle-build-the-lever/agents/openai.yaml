@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-build-the-lever"
+  short_description: "Apply to any non-trivial work, not just bulk work: edits, migrat"
+policy:
+  allow_implicit_invocation: false

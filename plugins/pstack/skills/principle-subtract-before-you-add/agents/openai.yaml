@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-subtract-before-you-add"
+  short_description: "Apply when sequencing an addition, refactor, or rewrite. Remove "
+policy:
+  allow_implicit_invocation: false

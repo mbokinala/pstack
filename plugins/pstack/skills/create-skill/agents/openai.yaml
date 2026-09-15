@@ -1,0 +1,5 @@
+interface:
+  display_name: "create-skill"
+  short_description: "Author or revise a portable Agent Skills directory with scoped t"
+policy:
+  allow_implicit_invocation: false

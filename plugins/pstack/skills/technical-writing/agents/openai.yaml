@@ -1,0 +1,5 @@
+interface:
+  display_name: "technical-writing"
+  short_description: "Layered technical-writing standard: Diátaxis structure, Google d"
+policy:
+  allow_implicit_invocation: false

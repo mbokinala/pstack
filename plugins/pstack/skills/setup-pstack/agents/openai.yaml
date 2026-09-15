@@ -1,0 +1,5 @@
+interface:
+  display_name: "setup-pstack"
+  short_description: "Configure pstack's per-role models for this project or user, usi"
+policy:
+  allow_implicit_invocation: true

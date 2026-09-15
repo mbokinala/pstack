@@ -1,0 +1,5 @@
+interface:
+  display_name: "control-cli"
+  short_description: "Verify actual CLI or terminal UI behavior through the available "
+policy:
+  allow_implicit_invocation: false

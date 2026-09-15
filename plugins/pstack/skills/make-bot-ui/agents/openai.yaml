@@ -1,0 +1,5 @@
+interface:
+  display_name: "make-bot-ui"
+  short_description: "Build a small local UI that sends structured events to an existi"
+policy:
+  allow_implicit_invocation: false

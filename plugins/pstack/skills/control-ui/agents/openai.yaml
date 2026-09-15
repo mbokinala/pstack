@@ -1,0 +1,5 @@
+interface:
+  display_name: "control-ui"
+  short_description: "Verify a running browser, desktop, or mobile UI using available "
+policy:
+  allow_implicit_invocation: false

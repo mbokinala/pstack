@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-never-block-on-the-human"
+  short_description: "Apply when tempted to ask 'should I do X?' on reversible work. P"
+policy:
+  allow_implicit_invocation: false

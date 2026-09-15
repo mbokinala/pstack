@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-make-operations-idempotent"
+  short_description: "Apply when designing commands, lifecycle steps, or processing lo"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-boundary-discipline"
+  short_description: "Apply when wiring validation, error handling, or framework adapt"
+policy:
+  allow_implicit_invocation: false

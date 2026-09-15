@@ -1,0 +1,5 @@
+interface:
+  display_name: "architect"
+  short_description: "Sketch types, signatures, and module structure before code, then"
+policy:
+  allow_implicit_invocation: false

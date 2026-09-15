@@ -1,0 +1,5 @@
+interface:
+  display_name: "deslop"
+  short_description: "Review a scoped code diff for unnecessary abstractions, redundan"
+policy:
+  allow_implicit_invocation: false

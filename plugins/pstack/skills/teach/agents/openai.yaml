@@ -1,0 +1,5 @@
+interface:
+  display_name: "teach"
+  short_description: "Explain a body of work plainly so a person actually understands "
+policy:
+  allow_implicit_invocation: false

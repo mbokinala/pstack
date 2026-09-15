@@ -1,0 +1,5 @@
+interface:
+  display_name: "recall"
+  short_description: "Reconstruct recent working context from available project-scoped"
+policy:
+  allow_implicit_invocation: false

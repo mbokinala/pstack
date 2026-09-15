@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-fix-root-causes"
+  short_description: "Apply when debugging. Trace each symptom to its root cause and f"
+policy:
+  allow_implicit_invocation: false

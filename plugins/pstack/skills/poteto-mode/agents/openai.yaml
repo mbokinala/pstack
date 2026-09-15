@@ -1,0 +1,5 @@
+interface:
+  display_name: "poteto-mode"
+  short_description: "poteto's agent style for concise, detailed responses, deliberate"
+policy:
+  allow_implicit_invocation: false

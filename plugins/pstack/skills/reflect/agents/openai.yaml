@@ -1,0 +1,5 @@
+interface:
+  display_name: "reflect"
+  short_description: "Review the current conversation through judgment, tooling, and d"
+policy:
+  allow_implicit_invocation: false

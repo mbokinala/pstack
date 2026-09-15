@@ -18,4 +18,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Check committed marketplace artifacts
+        run: |
+          git diff --exit-code -- plugins/pstack
+          test -z "$(git ls-files --others --exclude-standard plugins/pstack)"
       - run: npm pack --ignore-scripts

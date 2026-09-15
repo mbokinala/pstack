@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-attack-the-premise"
+  short_description: "Apply when two or more fixes that share one premise have failed "
+policy:
+  allow_implicit_invocation: false

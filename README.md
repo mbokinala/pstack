@@ -4,6 +4,22 @@ Portable [pstack](https://github.com/cursor/plugins/tree/main/pstack) workflows 
 
 ## Use it locally
 
+### Codex plugin from GitHub
+
+Register this repository as a plugin marketplace:
+
+```sh
+codex plugin marketplace add mbokinala/pstack
+```
+
+Open the desktop Plugins Directory, select the marketplace from this repository, and install **pstack**. Start a new conversation and invoke **`$poteto-mode`**. All 51 individual skills are also included with their existing names.
+
+The repository includes the generated plugin under `plugins/pstack`, so marketplace installation needs no Node.js build or upstream submodule checkout. Optional helper workflows still require their documented tools (such as Bun and GitHub CLI). The plugin bundles the two agent prompts as skill references; it does not install custom agents into `.codex/agents`.
+
+Use either the Codex plugin or the Codex file installer to avoid duplicate skills. The installer below remains available for all three hosts.
+
+### File installer
+
 Node.js 22 or newer is required for the installer. From this checkout:
 
 ```sh

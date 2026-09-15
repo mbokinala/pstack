@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-foundational-thinking"
+  short_description: "Apply before writing logic: choosing core types and data structu"
+policy:
+  allow_implicit_invocation: false

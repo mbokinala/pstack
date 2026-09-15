@@ -1,0 +1,5 @@
+interface:
+  display_name: "principle-experience-first"
+  short_description: "Apply when product, UX, or feature-scope tradeoffs come up. Choo"
+policy:
+  allow_implicit_invocation: false

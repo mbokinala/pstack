@@ -1,0 +1,5 @@
+interface:
+  display_name: "how"
+  short_description: "Use for \"how does X work\", code walkthroughs before changing som"
+policy:
+  allow_implicit_invocation: false
