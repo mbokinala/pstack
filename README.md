@@ -1,6 +1,6 @@
 # pstack
 
-Portable [pstack](https://github.com/cursor/plugins/tree/main/pstack) workflows for Codex, Claude Code, and Cursor. This independent port builds from a pinned upstream Git submodule and installs a complete skill bundle. It is not an official Cursor or OpenAI package.
+Port of [@poteto](https://github.com/poteto)'s [pstack](https://github.com/cursor/plugins/tree/main/pstack) workflows for Codex, Claude Code, and Cursor. This independent port builds from a pinned upstream Git submodule and installs a complete skill bundle. It is not an official Cursor or OpenAI package.
 
 ## Installation
 
