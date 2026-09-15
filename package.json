@@ -16,7 +16,8 @@
     "dist/",
     "LICENSE",
     "NOTICE.md",
-    "README.md"
+    "README.md",
+    "DEVELOPMENT.md"
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
