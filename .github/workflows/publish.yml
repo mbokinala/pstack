@@ -54,3 +54,22 @@ jobs:
           NPM_CHANNEL: ${{ steps.release.outputs.channel }}
         # Checks already ran above; avoid rebuilding after verifying artifacts.
         run: npm publish --access public --ignore-scripts --tag "$NPM_CHANNEL"
+
+  github-release:
+    needs: publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          PRERELEASE: ${{ contains(github.ref_name, '-') }}
+        run: |
+          gh release create "$RELEASE_TAG" \
+            --verify-tag \
+            --generate-notes \
+            --title "$RELEASE_TAG" \
+            --prerelease="$PRERELEASE"

@@ -60,19 +60,18 @@ npx --yes --package=/absolute/path/to/mbokinala-pstack-0.1.0.tgz pstack install 
 
 `.github/workflows/publish.yml` publishes `@mbokinala/pstack` when a `v*` tag is pushed to GitHub. The tag must exactly match `package.json` (for example, `v0.1.0`). The workflow builds, validates, tests, and checks committed marketplace artifacts before publishing. Stable versions use npm's `latest` channel; prereleases such as `v0.2.0-beta.1` use `next`.
 
-For releases, start with a clean working tree and update the version before generating and committing the marketplace bundle:
+`package.json` is the source of truth for the release version. Use `npm version` to update it and the lockfile together. The `version` lifecycle hook rebuilds and stages the marketplace bundle before npm creates the release commit and tag. Full validation and tests run in CI before publishing; you do not need to run `npm run check` manually for each release.
+
+After committing your source changes, start with a clean working tree and installed dependencies (`npm ci` on a fresh checkout):
 
 ```sh
-npm version patch --no-git-tag-version
-npm run check
-git add package.json package-lock.json plugins/pstack
-git commit -m "Release npm package"
-git tag "v$(node -p 'require("./package.json").version')"
-git push
-git push origin "v$(node -p 'require("./package.json").version')"
+npm version patch -m "Release v%s"
+git push --follow-tags
 ```
 
-Use an explicit version with `npm version` for minor, major, or prerelease releases. A tag push triggers publication; creating a GitHub Release is optional.
+Use `minor`, `major`, or an explicit version (for example, `npm version 0.3.0-beta.1`) as needed. Do not hand-edit the version or bypass lifecycle scripts with `--ignore-scripts`; the hook keeps the committed plugin metadata synchronized. A tag push triggers publication. If checks fail, publication is blocked even though the tag has already been pushed.
+
+After npm publishing succeeds, a separate job creates a GitHub Release for the same tag with automatically generated release notes. Versions containing a prerelease suffix are marked as GitHub prereleases. If GitHub Release creation fails after npm publishing succeeds, rerun only the failed job to retry without attempting to publish the npm version again.
 
 ### GitHub marketplace release
 
@@ -80,7 +79,7 @@ Use an explicit version with `npm version` for minor, major, or prerelease relea
 
 Commit the generated `plugins/pstack/` files together with source changes. Git marketplace installs consume these files directly and do not run npm or initialize the upstream submodule. Do not edit generated skills by hand; edit adapters and rebuild. Plugin presentation metadata is maintained in `plugins/pstack/.codex-plugin/plugin.json`.
 
-Before releasing, run `npm run check`, review the generated diff, and commit it. CI checks that the committed plugin matches the build. Marketplace updates become available when changes are pushed to the repository's default branch (or the ref users install). Users can pin a published tag with `codex plugin marketplace add mbokinala/pstack --ref v0.1.0` (substitute an existing release tag).
+For a versioned release, use the `npm version` flow above to regenerate and commit the bundle automatically. For source-only marketplace updates, run `npm run build`, review the generated diff, and commit it with the source changes. CI runs the full checks and verifies that the committed plugin matches the build. Marketplace updates become available when changes are pushed to the repository's default branch (or the ref users install). Users can pin a published tag with `codex plugin marketplace add mbokinala/pstack --ref v0.1.0` (substitute an existing release tag).
 
 Once published, the user installation command is:
 

@@ -21,6 +21,7 @@
   ],
   "scripts": {
     "build": "node scripts/build.mjs",
+    "version": "npm run build && git add -- plugins/pstack",
     "validate": "node scripts/validate.mjs",
     "test": "node --test --test-concurrency=1 test/*.test.mjs",
     "check": "npm run build && npm run validate && npm test",
