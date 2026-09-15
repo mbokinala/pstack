@@ -13,6 +13,9 @@ adapters/additions/         Portable dependency skills
 adapters/runtime.md        Shared runtime contract
 lib/convert.mjs             Metadata and provider path conversion
 scripts/build.mjs          Generates all provider distributions
+scripts/build-plugin.mjs   Packages the Codex plugin from generated skills
+.agents/plugins/marketplace.json  GitHub marketplace catalog
+plugins/pstack/             Generated plugin bundle, committed to Git
 dist/                      Generated, ignored by Git, included in npm package
 ```
 
@@ -33,7 +36,7 @@ After reviewing:
 ```sh
 npm run upstream:accept
 npm run check
-git add upstream/cursor-plugins upstream.lock.json adapters lib scripts
+git add upstream/cursor-plugins upstream.lock.json adapters lib scripts plugins/pstack
 ```
 
 Commit the submodule pointer, updated lock, and adaptations together. `accept` records that review; it does not prove compatibility. Builds reject an unaccepted commit, dirty upstream pstack files, missing override targets, or a patch whose original text no longer occurs exactly once. The source lock also catches upstream additions and removals. The port never edits the submodule.
@@ -62,6 +65,16 @@ For an npm release, first choose an owned package name/scope and set the reposit
 Commit the generated `plugins/pstack/` files together with source changes. Git marketplace installs consume these files directly and do not run npm or initialize the upstream submodule. Do not edit generated skills by hand; edit adapters and rebuild. Plugin presentation metadata is maintained in `plugins/pstack/.codex-plugin/plugin.json`.
 
 Before releasing, run `npm run check`, review the generated diff, and commit it. CI checks that the committed plugin matches the build. Publish the commit to `mbokinala/pstack`, then optionally tag the release. Users can pin a published tag with `codex plugin marketplace add mbokinala/pstack --ref v0.1.0` (substitute an existing release tag).
+
+The initial marketplace release must include both `.agents/plugins/marketplace.json` and the complete `plugins/pstack/` directory. Local changes become available to GitHub marketplace users only after they are committed and pushed to the repository's default branch (or the ref users install).
+
+Once published, the user installation command is:
+
+```sh
+codex plugin marketplace add mbokinala/pstack
+```
+
+Users then select the **pstack** marketplace in the desktop Plugins Directory, install **pstack**, and invoke **`$poteto-mode`** in a new conversation. See [the installation walkthrough](README.md#codex-plugin-from-github).
 
 Install **pstack** from the desktop Plugins Directory and test `$poteto-mode`, a direct individual skill invocation, and a workflow using bundled resources in a new conversation. The plugin uses the bundled agent prompt fallback rather than registering the file installer's custom agents. Helper dependency bootstrap still needs network access and a writable installed scripts directory; installation alone does not verify those optional runtime capabilities.
 

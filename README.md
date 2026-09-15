@@ -1,18 +1,27 @@
-# pstack port
+# pstack
 
 Portable [pstack](https://github.com/cursor/plugins/tree/main/pstack) workflows for Codex, Claude Code, and Cursor. This independent port builds from a pinned upstream Git submodule and installs a complete skill bundle. It is not an official Cursor or OpenAI package.
 
-## Use it locally
+## Installation
 
 ### Codex plugin from GitHub
 
-Register this repository as a plugin marketplace:
+Install the **pstack** Codex plugin from [mbokinala/pstack](https://github.com/mbokinala/pstack):
+
+1. Register the GitHub marketplace from your terminal:
 
 ```sh
 codex plugin marketplace add mbokinala/pstack
 ```
 
-Open the desktop Plugins Directory, select the marketplace from this repository, and install **pstack**. Start a new conversation and invoke **`$poteto-mode`**. All 51 individual skills are also included with their existing names.
+2. Open the desktop **Plugins Directory**, select the **pstack** marketplace, and install the **pstack** plugin.
+3. Start a new conversation and invoke **`$poteto-mode`**, for example:
+
+```text
+$poteto-mode Help me implement this feature and verify it works.
+```
+
+**pstack is the plugin name; `$poteto-mode` is the entry skill.** All 51 skills retain their existing names, including `$how` and `$interrogate`.
 
 The repository includes the generated plugin under `plugins/pstack`, so marketplace installation needs no Node.js build or upstream submodule checkout. Optional helper workflows still require their documented tools (such as Bun and GitHub CLI). The plugin bundles the two agent prompts as skill references; it does not install custom agents into `.codex/agents`.
 
@@ -50,6 +59,20 @@ node bin/pstack.mjs install --providers=codex,claude --scope=global
 Global installation targets your home directory. `--target` overrides the target directory, including for isolated global-scope testing. Project installations are ordinary files that a team can commit. Global installation applies only where the host reads local user files; it does not provision cloud environments.
 
 ## Update and remove
+
+### Codex plugin
+
+Manage the **pstack** plugin through the desktop Plugins Directory. Start a new conversation after changing the installed version. The `pstack update` and `pstack remove` commands below apply to file installations, not marketplace plugins.
+
+For a fixed release, register an existing Git tag instead of following the default branch:
+
+```sh
+codex plugin marketplace add mbokinala/pstack --ref <release-tag>
+```
+
+Replace `<release-tag>` with a tag published in the repository.
+
+### File installer
 
 Run these from the target project using the CLI from a newer built checkout or release package:
 
