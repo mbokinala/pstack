@@ -4,6 +4,35 @@ Port of [@poteto](https://github.com/poteto)'s [pstack](https://github.com/curso
 
 ## Installation
 
+Run in your project directory (requires Node.js 22+):
+
+```sh
+npx @mbokinala/pstack@latest install
+```
+
+### Get started
+
+In Claude Code or Cursor:
+
+```text
+/poteto-mode Help me implement this feature.
+```
+
+In Codex:
+
+```text
+$poteto-mode Help me implement this feature.
+```
+
+Update later with `npx @mbokinala/pstack@latest update`.
+
+<details>
+<summary>Install options and tool support</summary>
+
+The installer detects existing host directories, defaulting to Codex and Claude Code when none are found. Choose hosts explicitly with `--providers=codex,claude,cursor`, or install for all projects with `--scope=global`.
+
+Check your installation with `npx @mbokinala/pstack@latest doctor`. Reload the host if newly installed skills or agents do not appear.
+
 ### Codex plugin from GitHub
 
 Install the **pstack** Codex plugin from [mbokinala/pstack](https://github.com/mbokinala/pstack):
@@ -25,7 +54,7 @@ $poteto-mode Help me implement this feature and verify it works.
 
 The repository includes the generated plugin under `plugins/pstack`, so marketplace installation needs no Node.js build or upstream submodule checkout. Optional helper workflows still require their documented tools (such as Bun and GitHub CLI). The plugin bundles the two agent prompts as skill references; it does not install custom agents into `.codex/agents`.
 
-Use either the Codex plugin or the Codex file installer to avoid duplicate skills. The installer below remains available for all three hosts.
+Use either the Codex plugin or the file installer (via `npx` or a checkout) to avoid duplicate skills. The file installer supports all three hosts.
 
 ### File installer
 
@@ -58,6 +87,8 @@ node bin/pstack.mjs install --providers=codex,claude --scope=global
 
 Global installation targets your home directory. `--target` overrides the target directory, including for isolated global-scope testing. Project installations are ordinary files that a team can commit. Global installation applies only where the host reads local user files; it does not provision cloud environments.
 
+</details>
+
 ## Update and remove
 
 ### Codex plugin
@@ -74,14 +105,14 @@ Replace `<release-tag>` with a tag published in the repository.
 
 ### File installer
 
-Run these from the target project using the CLI from a newer built checkout or release package:
+Run these from the target project:
 
 ```sh
-pstack update --scope=project
-pstack remove --providers=claude --scope=project
+npx @mbokinala/pstack@latest update --scope=project
+npx @mbokinala/pstack@latest remove --providers=claude --scope=project
 ```
 
-For this unpublished checkout, replace `pstack` with `node /absolute/path/to/pstack-port/bin/pstack.mjs`. `update` applies the version bundled with the running CLI; it does not fetch npm or upstream Git by itself. Install/update/remove accept `--dry-run`.
+To use a local checkout, replace `npx @mbokinala/pstack@latest` with `node /absolute/path/to/pstack-port/bin/pstack.mjs`. `update` applies the version bundled with the running CLI; it does not fetch npm or upstream Git by itself. Using `npx` with `@latest` selects the latest published CLI. Install/update/remove accept `--dry-run`.
 
 `.pstack/install.json` records managed file hashes and release provenance. Installation refuses collisions with unmanaged or locally edited files before changing any files. Updates retire unchanged files removed from a release. Removal preserves modified files and unrelated content. User settings in `.pstack/config.json` are never managed by the installer.
 
