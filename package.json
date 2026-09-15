@@ -1,0 +1,33 @@
+{
+  "name": "pstack-port",
+  "version": "0.1.0",
+  "description": "Portable pstack workflows for Codex, Claude Code, and Cursor",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "pstack": "bin/pstack.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "bin/",
+    "lib/installer.mjs",
+    "dist/",
+    "LICENSE",
+    "NOTICE.md",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test --test-concurrency=1 test/*.test.mjs",
+    "check": "npm run build && npm run validate && npm test",
+    "upstream:review": "node scripts/upstream.mjs review",
+    "upstream:accept": "node scripts/upstream.mjs accept",
+    "prepack": "npm run check"
+  },
+  "devDependencies": {
+    "yaml": "2.9.1"
+  }
+}

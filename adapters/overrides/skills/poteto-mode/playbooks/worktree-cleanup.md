@@ -1,0 +1,12 @@
+### Worktree and simulator cleanup
+
+**Audit first and preserve work that cannot be reconstructed.**
+
+1. Record current disk usage and run the owning skill's `scripts/worktree-audit.sh [repo-path]`. It requires Git and Python 3, reads the exact Git worktree paths, and reports merge evidence from local refs, dirty/untracked/ignored files, locks, remote tracking, and candidate status. It performs no fetch, deletion, pruning, or transcript search. Use `--base <ref>` when the repository's default integration branch cannot be resolved locally. Ref freshness and live PR state are separate checks.
+2. Establish current usage from this session, known live agents, and the user/host's supplied activity information. The audit cannot know which worktrees another session has open. Never infer “unused” from a stale timestamp or clean status. A merged candidate is a review suggestion, not permission to remove it.
+3. For each proposed removal, verify the exact path, branch, commit reachability, PR state where available, active ownership, and all tracked, untracked, and ignored files. An untracked file may be valuable work; an ignored path may contain local data. A closed PR is not proof its changes were merged. Preserve locked worktrees and any candidate with unknown status until the uncertainty is resolved.
+4. Proceed with clean, verified-unused worktrees when cleanup is within the user's request. A request to audit disk alone does not authorize deletion. For work that would be lost or an in-use worktree, present the concrete affected files and resolve that decision first. Prefer ordinary `git worktree remove -- <exact-path>`; never escalate automatically to `--force` or `rm -rf` after a failure. Investigate what Git is protecting.
+5. Re-list worktrees and disk usage after authorized removals. Leave branch deletion as a separate action unless explicitly included. Prune stale Git worktree metadata only when it is confirmed stale and within the requested cleanup.
+6. Simulator and cache cleanup is optional, platform-specific scope. On macOS, first inspect available `xcrun simctl` inventories when the user requested simulator cleanup. Name exact unused devices/runtimes or caches and their loss before removal. Do not bundle simulator deletion, host state deletion, or unrelated package-cache cleanup into a worktree request.
+
+**Reply:** disk usage before and after if cleanup ran, worktrees removed, and the reason each remaining candidate is held or needs review. For an audit-only request, report candidates and evidence without deleting them.
