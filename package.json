@@ -1,6 +1,6 @@
 {
-  "name": "pstack-port",
-  "version": "0.1.0",
+  "name": "@mbokinala/pstack",
+  "version": "0.2.0",
   "description": "Portable pstack workflows for Codex, Claude Code, and Cursor",
   "type": "module",
   "license": "MIT",
@@ -30,5 +30,12 @@
   },
   "devDependencies": {
     "yaml": "2.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mbokinala/pstack.git"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

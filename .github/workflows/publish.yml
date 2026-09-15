@@ -1,0 +1,56 @@
+name: Publish npm package
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: npm-publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: recursive
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+          package-manager-cache: false
+      - name: Use npm with trusted publishing support
+        run: npm install --global npm@11
+      - name: Verify release tag and choose npm channel
+        id: release
+        run: |
+          node --input-type=module <<'NODE'
+          import { readFileSync, appendFileSync } from 'node:fs';
+          const { version } = JSON.parse(readFileSync('package.json', 'utf8'));
+          if (process.env.GITHUB_REF_NAME !== `v${version}`) {
+            throw new Error(`Tag must match package.json version: v${version}`);
+          }
+          const channel = version.includes('-') ? 'next' : 'latest';
+          appendFileSync(process.env.GITHUB_OUTPUT, `channel=${channel}\n`);
+          NODE
+      - run: npm ci
+      - name: Build, validate, and test
+        run: npm run check
+      - name: Check committed marketplace artifacts
+        run: |
+          git diff --exit-code -- plugins/pstack
+          test -z "$(git ls-files --others --exclude-standard plugins/pstack)"
+      - name: Publish to npm
+        env:
+          NPM_CHANNEL: ${{ steps.release.outputs.channel }}
+        # Checks already ran above; avoid rebuilding after verifying artifacts.
+        run: npm publish --access public --ignore-scripts --tag "$NPM_CHANNEL"
